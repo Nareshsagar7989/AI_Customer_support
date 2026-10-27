@@ -3,18 +3,21 @@ from sqlalchemy.sql import func
 from app.database import Base
 import enum
 
-class RoleEnum(enum.Enum):
-    OWNER = "OWNER"
-    MANAGER = "MANAGER"
-    AGENT = "AGENT"
+class UserRoleEnum(str, enum.Enum):
+    ADMIN = "ADMIN"
+    CUSTOMER = "CUSTOMER"
+
+RoleEnum = UserRoleEnum
 
 class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255))
-    email = Column(String(255), unique=True, index=True)
-    password_hash = Column(String(255))
-    role = Column(Enum(RoleEnum))
+    username = Column(String(100), unique=True, index=True, nullable=False)
+    name = Column(String(255), nullable=True)
+    phone = Column(String(50), nullable=True)
+    email = Column(String(255), nullable=True)
+    password_hash = Column(String(64), nullable=False) # 64-character SHA-256 hash
+    role = Column(String(50), default="CUSTOMER")      # "CUSTOMER" or "ADMIN"
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())

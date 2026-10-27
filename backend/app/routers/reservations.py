@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from app.database import get_db
-from app.schemas.reservations import ReservationCreate, ReservationResponse
+from app.schemas.reservations import ReservationCreate, ReservationBookRequest, ReservationResponse
 from app.services import reservation_service
 from app.models.transactions import ReservationStatusEnum
 
@@ -15,6 +15,11 @@ router = APIRouter(
 @router.post("/", response_model=ReservationResponse)
 def create_reservation(reservation: ReservationCreate, db: Session = Depends(get_db)):
     return reservation_service.create_reservation(db, reservation)
+
+@router.post("/book", response_model=ReservationResponse)
+def book_table_endpoint(book_req: ReservationBookRequest, db: Session = Depends(get_db)):
+    """Dynamically book a table with customer name and phone."""
+    return reservation_service.book_table_dynamically(db, book_req)
 
 @router.get("/{restaurant_id}", response_model=List[ReservationResponse])
 def get_reservations(restaurant_id: int, db: Session = Depends(get_db)):

@@ -1,8 +1,10 @@
+from typing import Optional, List, Dict, Any
 from pydantic import BaseModel
 
 class ChatRequest(BaseModel):
     message: str
-    conversation_id: int = None # We will use this later to remember chat history
+    conversation_id: Optional[int] = None
+    history: Optional[List[Dict[str, Any]]] = None
 
 class ChatResponse(BaseModel):
     reply: str

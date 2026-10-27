@@ -1,4 +1,4 @@
-﻿annotated-doc==0.0.5
+annotated-doc==0.0.5
 annotated-types==0.8.0
 anyio==4.15.1
 click==8.5.0
@@ -8,7 +8,9 @@ httpcore2==2.13.1
 httpx2==2.13.1
 idna==3.20
 jiter==0.17.0
-groq
+groq==1.7.0
+chromadb==1.5.9
+cryptography==50.0.2
 opentelemetry-api==1.45.1
 pydantic==2.13.5
 pydantic_core==2.46.5
