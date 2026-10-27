@@ -16,6 +16,8 @@ __pycache__/
 .vscode/
 .idea/
 
-# Database
+# Database & Vector Store
 *.sqlite3
 *.db
+chroma_db/
+*.bin
